@@ -1,0 +1,7 @@
+{
+  "env": {
+      "MONGO_USER": "devsfer",
+      "MONGO_PASSWORD": "oP8mF59i",
+      "MONGO_DB": "TodoLIst"
+  }
+}
