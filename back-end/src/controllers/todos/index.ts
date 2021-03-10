@@ -7,8 +7,8 @@ const getTodos = async (req: Request, res: Response): Promise<void> => {
   try {
     const todos: TodoInterface[] = await Todo.find();
     res.status(200).json({ todos })
-  } catch(error) {
-    throw error
+  } catch(err) {
+    console.log(err.message);
   }
 };
 
@@ -22,12 +22,14 @@ const addTodo = async (req: Request, res: Response): Promise<void> => {
       status: body.status
     })
 
+    console.log(todo.name)
+
     const newTodo: TodoInterface = await todo.save();
     const allTodos: TodoInterface[] = await Todo.find();
 
     res.status(201).json({ message: 'Tarefa Adicionada', todo: newTodo, todos: allTodos })
-  } catch (error) {
-    throw error
+  } catch (err) {
+    console.log(err.message);
   }
 }
 
@@ -47,8 +49,8 @@ const updateTodo = async (req: Request, res: Response): Promise<void> => {
       todo: updateTodo,
       todos: allTodos
     })
-  } catch (error) {
-    throw error
+  } catch (err) {
+    console.log(err.message);
   }
 }
 
@@ -63,8 +65,8 @@ const deleteTodo = async (req: Request, res: Response): Promise<void> => {
       todo: deleteTodo,
       todos: allTodos,
     })
-  } catch (error) {
-    throw error
+  } catch (err) {
+    console.log(err.message);
   }
 }
 

@@ -9,7 +9,7 @@ export default createGlobalStyle`
   }
 
   body {
-    background-color: #1a1919;
+    background-color: #242424;
     -webkit-font-smoothing: antialiased;
     width: 100%;
     min-height: 100vh;

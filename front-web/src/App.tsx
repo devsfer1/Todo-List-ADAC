@@ -1,17 +1,80 @@
-import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 
-import GlobalStyle from './styles/global';
-import Routes from './routes';
+import CreateGlobalStyle from './styles/global';
 
-const App: React.FC = () => (
-  <>
-    <BrowserRouter>
-      <Routes /> 
-    </BrowserRouter>
-    <GlobalStyle />
-  </>
-)
-  
-export default App;
+import AddTodo from './components/AddTodo'
 
+import TodoItem from './components/TodoItem';
+
+import { Container, Header, Title } from './components/AddTodoStyle'
+
+import { getTodos, addTodo, updateTodo, deleteTodo } from './services/Api';
+
+const App: React.FC = () =>  {
+  const [todos, setTodos] = useState<TodoInterface[]>([]);
+
+  useEffect(() => {
+    fetchTodos();
+  }, []);
+
+  const fetchTodos = (): void => {
+    getTodos()
+      .then(({ data: { todos } }: TodoInterface[] | any) => setTodos(todos))
+      .catch((err: Error) => console.log(err));
+  };
+
+  const handleSaveTodo = (e: React.FormEvent, formData: TodoInterface): void => {
+    e.preventDefault();
+    addTodo(formData)
+      .then(({ status, data }) => {
+        if (status !== 201) {
+          throw new Error('Error! Todo not saved');
+        }
+        setTodos(data.todos);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleUpdateTodo = (todo: TodoInterface): void => {
+    updateTodo(todo)
+      .then(({ status, data }) => {
+        if (status !== 200) {
+          throw new Error('Error! Todo not updated');
+        }
+        setTodos(data.todos);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleDeleteTodo = (_id: string): void => {
+    deleteTodo(_id)
+      .then(({ status, data }) => {
+        if (status !== 200) {
+          throw new Error('Error! Todo not deleted');
+        }
+        setTodos(data.todos);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  return (
+    <>
+      <Container>
+        <Header>
+          <Title>Todo List ADAC</Title>
+        </Header>
+        <AddTodo saveTodo={handleSaveTodo} />
+        {todos.map((todo: TodoInterface) => (
+          <TodoItem
+            key={todo._id}
+            updateTodo={handleUpdateTodo}
+            deleteTodo={handleDeleteTodo}
+            todo={todo} />
+        ))}
+      </Container>
+      <CreateGlobalStyle />
+    </>
+  );
+}
+
+export default App

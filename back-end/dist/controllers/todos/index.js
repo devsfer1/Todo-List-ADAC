@@ -19,8 +19,8 @@ const getTodos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const todos = yield todo_1.default.find();
         res.status(200).json({ todos });
     }
-    catch (error) {
-        throw error;
+    catch (err) {
+        console.log(err.message);
     }
 });
 exports.getTodos = getTodos;
@@ -32,12 +32,13 @@ const addTodo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             description: body.description,
             status: body.status
         });
+        console.log(todo.name);
         const newTodo = yield todo.save();
         const allTodos = yield todo_1.default.find();
         res.status(201).json({ message: 'Tarefa Adicionada', todo: newTodo, todos: allTodos });
     }
-    catch (error) {
-        throw error;
+    catch (err) {
+        console.log(err.message);
     }
 });
 exports.addTodo = addTodo;
@@ -52,8 +53,8 @@ const updateTodo = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             todos: allTodos
         });
     }
-    catch (error) {
-        throw error;
+    catch (err) {
+        console.log(err.message);
     }
 });
 exports.updateTodo = updateTodo;
@@ -67,8 +68,8 @@ const deleteTodo = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             todos: allTodos,
         });
     }
-    catch (error) {
-        throw error;
+    catch (err) {
+        console.log(err.message);
     }
 });
 exports.deleteTodo = deleteTodo;
