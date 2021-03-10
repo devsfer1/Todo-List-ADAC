@@ -23,7 +23,7 @@ Após adicionar ou remover uma tarefa ela fica salva no banco de dados da aplica
 <hr>
 <p>Digite <pre><code>$ git clone https://github.com/devsfer1/Todo-List-ADAC</code></pre> para clonar o repositório no seu computador.</p>
 <br>
-<p>Digite <pre><code>yarn</code></pre> para instalar as dependências.</p>
+<p>Digite <pre><code>yarn</code></pre> no terminal das duas pastas para instalar as dependências.</p>
 <br>
 <p>Digite <pre><code>yarn start</code></pre>no terminal da pasta "back-end" para iniciar o servidor.</p>
 <br>
