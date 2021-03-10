@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+
+import { TodoContainer, DelBtn, CheckBtn, TodoName, Todo } from './TodoItemStyle';
 
 type Props = TodoProps & {
     updateTodo: (todo: TodoInterface) => void
@@ -6,28 +8,15 @@ type Props = TodoProps & {
 }
 
 const TodoItem: React.FC<Props> = ({ todo, updateTodo, deleteTodo }) => {
-  const checkTodo: string = todo.status ? `line-through` : ''
   return (
-    <div className='Card'>
-      <div className='Card--text'>
-        
-        <span className={checkTodo}>{todo.description}</span>
-      </div>
-      <div className='Card--button'>
-        <button
-          onClick={() => updateTodo(todo)}
-          className={todo.status ? `hide-button` : 'Card--button__done'}
-        >
-          Complete
-        </button>
-        <button
-          onClick={() => deleteTodo(todo._id)}
-          className='Card--button__delete'
-        >
-          Delete
-        </button>
-      </div>
-    </div>
+    <TodoContainer>
+      <DelBtn onClick={() => deleteTodo(todo._id)}>X</DelBtn>
+        <Todo>
+          <TodoName>{todo.name}</TodoName>
+          <span>{todo.description}</span>
+        </Todo>    
+        <CheckBtn onClick={() => updateTodo(todo)}>✔</CheckBtn>
+    </TodoContainer>
   )
 }
 

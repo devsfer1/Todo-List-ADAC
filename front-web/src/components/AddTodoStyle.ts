@@ -6,6 +6,7 @@ export const Container = styled.div`
   background-color: #F8F8F8;
   border-radius: 6px;
   box-shadow: 0 4px 4px 0 rgb(0 0 0 / 50%);
+  overflow-y: auto;
 `;
 
 export const Header = styled.div`
@@ -30,11 +31,19 @@ export const Form = styled.form`
   justify-content: space-between;
   flex-wrap: wrap;
   padding: 10px 15px;
+
+  @media(max-width: 800px) {
+    flex-direction: column;
+  }
 `
 
 export const FormItem = styled.div`
   width: 45%;
   margin: 0 15px 10px 0;
+
+  @media(max-width: 800px) {
+    width: 100%;
+  }
 `
 
 export const FormInput = styled.input`
@@ -70,5 +79,9 @@ export const FormBtn = styled.button`
 
   &:hover {
     background-color: #8b11f2;   
+  }
+
+  @media(max-width: 800px) {
+    width: 100%;
   }
 `
